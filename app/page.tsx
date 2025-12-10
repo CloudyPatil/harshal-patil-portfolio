@@ -203,7 +203,7 @@ function HudNav() {
 
   return (
     <Html 
-      portal={document.body}
+      portal={document.body as any}
       // ⬇️ THIS IS THE FIX: Prevents 3D math from moving the div
       calculatePosition={() => [0, 0, 0]} 
       style={{
