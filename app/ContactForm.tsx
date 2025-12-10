@@ -12,9 +12,9 @@ export default function ContactForm() {
     setStatus('sending')
 
     // 🚨 ENSURE THESE ARE STILL YOUR ACTUAL IDS
-    const SERVICE_ID = 'YOUR_SERVICE_ID' // Replace if you haven't yet
-    const TEMPLATE_ID = 'YOUR_TEMPLATE_ID'
-    const PUBLIC_KEY = 'YOUR_PUBLIC_KEY'
+    const SERVICE_ID = 'service_k1ih5xd' // Replace if you haven't yet
+    const TEMPLATE_ID = 'template_p9scvog'
+    const PUBLIC_KEY = 'V65oUbMay_uKJujp2'
 
     if(formRef.current) {
       emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY)
