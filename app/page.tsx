@@ -10,6 +10,8 @@ import { Github, Linkedin, Mail, Terminal, ExternalLink, Trophy, Youtube, BookOp
 import ContactForm from './ContactForm'
 import GlitchText from './GlitchText'
 
+
+
 // --- 1. THE CAMERA RIG (Movement Logic) ---
 function CameraRig() {
   const scroll = useScroll()
@@ -85,7 +87,6 @@ const HoloCard = ({ title, items, color, borderColor }: any) => {
   )
 }
 
-// --- COMPONENT: PROJECT CARD ---
 const ProjectCard = ({ title, codeName, description, tags, color, position, image, github, demo }: any) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -111,6 +112,7 @@ const ProjectCard = ({ title, codeName, description, tags, color, position, imag
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      // 👇 THIS IS YOUR ORIGINAL CLASS STRING (Preserved size and position)
       className={`relative bg-black/90 border border-gray-800 p-6 rounded-xl backdrop-blur-xl hover:border-opacity-100 transition-all duration-300 group w-full max-w-2xl pointer-events-auto ${position === 'left' ? 'mr-auto' : position === 'right' ? 'ml-auto' : 'mx-auto'}`}
       style={{ borderColor: color }} 
     >
@@ -121,24 +123,34 @@ const ProjectCard = ({ title, codeName, description, tags, color, position, imag
             <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
         </div>
       </div>
+
+      {/* Image Section */}
       <div className="relative w-full h-48 mb-6 overflow-hidden rounded border border-gray-800 group-hover:border-white/50 transition-colors">
         <img src={image} alt={title} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 grayscale group-hover:grayscale-0" />
         <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all"></div>
       </div>
+
       <h3 className="text-3xl font-bold text-white mb-2 font-cyber tracking-wide group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r" style={{ backgroundImage: `linear-gradient(to right, white, ${color})` }}>{title}</h3>
       <p className="text-gray-400 font-mono text-sm mb-6 leading-relaxed">{description}</p>
+      
       <div className="flex flex-wrap gap-2 mb-6">
         {tags.map((tag: string, i: number) => (
             <span key={i} className="px-3 py-1 text-xs font-mono rounded bg-gray-900 border border-gray-700 text-gray-300 group-hover:border-white transition-colors">{tag}</span>
         ))}
       </div>
-      <div className="flex gap-4">
+
+      {/* Buttons Section (Added z-index to work) */}
+      <div className="flex gap-4 z-10 relative">
         <a href={github} target="_blank" rel="noopener noreferrer" className="flex-1">
-            <button className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-transparent border border-gray-600 text-gray-300 font-cyber text-sm hover:border-white hover:text-white hover:bg-white/5 transition-all uppercase tracking-wider"><Github size={16} /> CODE</button>
+            <button className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-transparent border border-gray-600 text-gray-300 font-cyber text-sm hover:border-white hover:text-white hover:bg-white/5 transition-all uppercase tracking-wider cursor-pointer">
+                <Github size={16} /> CODE
+            </button>
         </a>
         {demo && (
             <a href={demo} target="_blank" rel="noopener noreferrer" className="flex-1">
-                <button className="w-full flex items-center justify-center gap-2 px-4 py-2 text-black font-bold font-cyber text-sm hover:opacity-80 transition-all uppercase tracking-wider" style={{ backgroundColor: color }}><ExternalLink size={16} /> DEMO</button>
+                <button className="w-full flex items-center justify-center gap-2 px-4 py-2 text-black font-bold font-cyber text-sm hover:opacity-80 transition-all uppercase tracking-wider cursor-pointer" style={{ backgroundColor: color }}>
+                    <ExternalLink size={16} /> DEMO
+                </button>
             </a>
         )}
       </div>
@@ -357,15 +369,45 @@ function SceneContent() {
             </div>
         </div>
 
-        {/* STOP 3: PROJECTS */}
+                {/* STOP 3: PROJECTS */}
         <div className="absolute top-[200vh] w-full px-8 md:px-20 pointer-events-none">
-            <ProjectCard title="PASHU AI" codeName="PROJECT_ID: BIO_AGRI_NET" description="A comprehensive AI diagnostic tool for livestock health. Integrates computer vision for cattle breed classification and automated disease prediction." tags={['Python', 'TensorFlow', 'React.js', 'Node.js']} color="#ff003c" position="left" image="https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?q=80&w=1000&auto=format&fit=crop" github="#" demo="#" />
+            <ProjectCard 
+                title="PASHU AI" 
+                codeName="PROJECT_ID: BIO_AGRI_NET" 
+                description="A comprehensive AI diagnostic tool for livestock health. Integrates computer vision for cattle breed classification and automated disease prediction." 
+                tags={['Python', 'TensorFlow', 'React.js', 'Node.js']} 
+                color="#ff003c" 
+                position="left" 
+                image="/pashu-ai.png" 
+                github="https://github.com/CloudyPatil/pashu-ai" 
+                demo="https://pashu-ai-demo.com" 
+            />
         </div>
         <div className="absolute top-[260vh] w-full px-8 md:px-20 pointer-events-none">
-            <ProjectCard title="MYSTIC INSIGHTS" codeName="PROJECT_ID: ORACLE_ENGINE" description="An AI-powered astrology platform featuring Palmistry (Image Processing) and NLP-based future insights." tags={['OpenCV', 'Next.js', 'Tailwind', 'NLP']} color="#00f3ff" position="right" image="https://images.unsplash.com/photo-1506318137071-a8bcbf6755dd?q=80&w=1000&auto=format&fit=crop" github="#" />
+            <ProjectCard 
+                title="MYSTIC INSIGHTS" 
+                codeName="PROJECT_ID: ORACLE_ENGINE" 
+                description="An AI-powered astrology platform featuring Palmistry (Image Processing) and NLP-based future insights." 
+                tags={['OpenCV', 'Next.js', 'Tailwind', 'NLP']} 
+                color="#00f3ff" 
+                position="right" 
+                image="/mystic-insights.png" 
+                github="https://github.com/CloudyPatil/mystic-insights" 
+                demo="https://mystic-insights-navy.vercel.app/" 
+            />
         </div>
         <div className="absolute top-[320vh] w-full px-8 md:px-20 pointer-events-none">
-            <ProjectCard title="MIND MAZE" codeName="PROJECT_ID: COGNITIVE_GRID" description="A gamified education platform designed to increase student retention through interactive learning modules." tags={['MongoDB', 'Express', 'React', 'Node.js']} color="#0aff00" position="left" image="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1000&auto=format&fit=crop" github="#" demo="#" />
+            <ProjectCard 
+                title="ALLERGY SENTINEL" 
+                codeName="PROJECT_ID: SAFE_SCAN" 
+                description="A health-tech solution that scans food ingredient labels. Detects allergens and carcinogenic additives using OCR and chemical analysis." 
+                tags={['Python', 'FastAPI', 'React', 'Tailwind', 'OCR']} 
+                color="#0aff00" 
+                position="left" 
+                image="/allergy-sentinel.png" 
+                github="https://github.com/CloudyPatil/allergy-sentinel" 
+                demo="http://allergy-sentinel.vercel.app" 
+            />
         </div>
 
         {/* STOP 4: STATS & YOUTUBE */}
