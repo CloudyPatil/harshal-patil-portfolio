@@ -380,7 +380,7 @@ function SceneContent() {
                 position="left" 
                 image="/pashu-ai.png" 
                 github="https://github.com/CloudyPatil/pashu-ai" 
-                demo="https://pashu-ai-demo.com" 
+                demo="https://pashu-ai.vercel.app/" 
             />
         </div>
         <div className="absolute top-[260vh] w-full px-8 md:px-20 pointer-events-none">
