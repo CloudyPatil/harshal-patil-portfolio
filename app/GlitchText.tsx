@@ -20,7 +20,7 @@ export default function GlitchText({ text, className = "", speed = 30 }: GlitchT
     clearInterval(intervalRef.current as NodeJS.Timeout)
 
     intervalRef.current = setInterval(() => {
-      setDisplayText(prev => 
+      setDisplayText(() =>
         text
           .split("")
           .map((letter, index) => {

@@ -1,32 +1,14 @@
-import "./globals.css"; 
-import type { Metadata } from "next";
-import { Inter, Orbitron } from "next/font/google";
-import React from "react";
-import CursorComet from "./CursorComet"; // Importing the new cursor
+import type { Metadata } from 'next'
+import localFont from 'next/font/local'
+import './globals.css'
 
-const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
-const orbitron = Orbitron({ subsets: ["latin"], variable: '--font-orbitron' });
+const orbitron = localFont({ src: '../public/fonts/orbitron-latin.woff2', variable: '--font-orbitron', display: 'swap', weight: '400 900' })
 
 export const metadata: Metadata = {
-  title: "Harshal | Cyberpunk Portfolio",
-  description: "Interactive 3D Portfolio",
-};
+  title: 'Harshal Patil | Full Stack Developer & AI Builder',
+  description: 'Harshal Patil builds full-stack products and applied AI systems. Explore RecruitAI, TRADEDO, Presente, experience, and selected work.',
+}
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="en">
-      {/* 'cursor-none' hides the default Windows arrow */}
-      <body className={`${inter.variable} ${orbitron.variable} font-sans bg-black text-white cursor-none`}>
-        
-        {/* The Custom Comet Cursor sits on top of everything */}
-        <CursorComet />
-
-        {children}
-      </body>
-    </html>
-  );
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return <html lang="en"><body className={orbitron.variable}>{children}</body></html>
 }
